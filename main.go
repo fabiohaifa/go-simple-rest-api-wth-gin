@@ -4,26 +4,21 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	Lib "example/hello/lib"
 )
 
-type Todo struct {
-	ID   int    `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-}
-
-var Todos = []Todo{
-	{ID: 1, Text: "Learn Go", Done: false},
-	{ID: 2, Text: "Learn Gin", Done: false},
-	{ID: 3, Text: "Learn Docker", Done: false},
-}
-
-func getTodos(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, Todos)
+func getToDos(context *gin.Context) {
+	name := context.Param("text")
+	context.IndentedJSON(http.StatusOK, Lib.GetAllToDos(name))
 }
 
 func main() {
 	router := gin.Default()
-	router.GET("/todos", getTodos)
+	// Retrive ToDos filtering by text
+	router.GET("/todo-list/:text", getToDos)
+	// Retrive all ToDos
+	router.GET("/todo-list", getToDos)
+	// Start the server at 9090 port
 	router.Run("localhost:9090")
 }
