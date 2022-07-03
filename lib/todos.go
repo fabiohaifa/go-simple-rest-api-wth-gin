@@ -1,5 +1,6 @@
 // S.O.L.I.D. principles:
-// Single Responsibility Principle >> 1 job only!
+// S ==> Single Responsibility Principle >> 1 job only!
+//
 
 package lib
 
@@ -13,13 +14,15 @@ var ToDos = []mod.ToDo{
 	{ID: 3, Text: "Learn Docker", Done: true},
 }
 
-func GetAllToDos(Text string) []mod.ToDo {
+type T int
+
+func (t T) GetAllToDos(text string) []mod.ToDo {
 	var retToDo []mod.ToDo
-	if Text == "" {
+	if text == "" {
 		retToDo = ToDos
 	} else {
 		for i, _ := range ToDos {
-			if isToDo(ToDos[i], Text) {
+			if t.isToDo(ToDos[i], text) {
 				retToDo = append(retToDo, ToDos[i])
 			}
 		}
@@ -27,6 +30,6 @@ func GetAllToDos(Text string) []mod.ToDo {
 	return retToDo
 }
 
-func isToDo(item mod.ToDo, Content string) bool {
+func (t T) isToDo(item mod.ToDo, Content string) bool {
 	return item.Text == Content
 }

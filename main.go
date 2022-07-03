@@ -10,7 +10,7 @@ import (
 
 func getToDos(context *gin.Context) {
 	name := context.Param("text")
-	context.IndentedJSON(http.StatusOK, Lib.GetAllToDos(name))
+	context.IndentedJSON(http.StatusOK, Lib.T.GetAllToDos(0, name))
 }
 
 func main() {

@@ -9,7 +9,7 @@ import (
 )
 
 func Test_getToDos(t *testing.T) {
-	arrToDos := GetAllToDos("")
+	arrToDos := T.GetAllToDos(0, "")
 	assert.NotNil(t, arrToDos, "ToDos should not be nil")
 	assert.Equal(t, len(arrToDos), 3, "ToDos should have 3 items")
 }
