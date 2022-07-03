@@ -13,3 +13,9 @@ func Test_getToDos(t *testing.T) {
 	assert.NotNil(t, arrToDos, "ToDos should not be nil")
 	assert.Equal(t, len(arrToDos), 3, "ToDos should have 3 items")
 }
+
+func Test_getOneToDos(t *testing.T) {
+	arrToDos := T.GetAllToDos(0, "Learn Gin")
+	assert.NotNil(t, arrToDos, "ToDos should not be nil")
+	assert.Equal(t, len(arrToDos), 1, "ToDos should have 1 items")
+}
