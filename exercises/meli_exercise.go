@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-func main() {
+func main2() {
 	var count int = 0
 	var wg sync.WaitGroup
 	var mu sync.Mutex
