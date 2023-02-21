@@ -8,7 +8,7 @@
 package lib
 
 import (
-	mod "example/hello/model"
+	mod "api-wth-gin/model"
 )
 
 var ToDos = []mod.ToDo{

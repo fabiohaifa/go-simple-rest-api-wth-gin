@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	Lib "example/hello/lib"
+	Lib "api-wth-gin/lib"
 )
 
 func getToDos(context *gin.Context) {
