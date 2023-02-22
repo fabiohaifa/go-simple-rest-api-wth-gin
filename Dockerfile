@@ -10,6 +10,7 @@ RUN go mod download
 
 COPY . .
 
+RUN go get github.com/gin-gonic/gin
 RUN go build -o /api-wth-gin
 
 EXPOSE 8080
