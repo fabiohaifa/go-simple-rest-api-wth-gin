@@ -13,6 +13,6 @@ COPY . .
 RUN go get github.com/gin-gonic/gin
 RUN go build -o /api-wth-gin
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD [ "/api-wth-gin" ]

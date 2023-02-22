@@ -21,6 +21,6 @@ func main() {
 	// Retrive all ToDos
 	router.GET("/todo-list", getToDos)
 	// Start the server at 9090 port
-	router.Run("localhost:9090")
+	router.Run("localhost:80")
 
 }
