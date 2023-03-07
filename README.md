@@ -1,6 +1,5 @@
-# go-simple-rest-api-wth-gin
-Simple Rest API using Gin
+# Simple Rest API using Gin
 
-SOLID concepts
-DDD
-TDD
+## Concepts Ideas:
+
+![App with Container](./drawning/sample.excalidraw.png)
