@@ -15,6 +15,8 @@ var ToDos = []mod.ToDo{
 	{ID: 1, Text: "Learn Go", Done: true},
 	{ID: 2, Text: "Learn Gin", Done: false},
 	{ID: 3, Text: "Learn Docker", Done: true},
+	{ID: 4, Text: "Learn ACI", Done: false},
+	{ID: 5, Text: "Learn ACA", Done: false},
 }
 
 type T int
