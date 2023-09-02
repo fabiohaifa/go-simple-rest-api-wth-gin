@@ -27,6 +27,7 @@ jobs:
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: RG_GO_DOCKER_TESTS
+            dns-name-label: RG_GO_DOCKER_TESTS${{ github.run_number }}
             image: acrfortests.azurecr.io/go-api-wth-gin
             registry-login-server: acrfortests.azurecr.io
             registry-username: ${{ secrets.GIT_TO_ACR_USER }}
