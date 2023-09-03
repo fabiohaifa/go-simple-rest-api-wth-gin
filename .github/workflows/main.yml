@@ -34,3 +34,5 @@ jobs:
             registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
             name: go-wth-gin
             location: east us 2
+            memory: 1
+            restart-policy: OnFailure
