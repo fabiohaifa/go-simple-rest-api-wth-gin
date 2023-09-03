@@ -1,0 +1,45 @@
+name: Trigger auto deployment for go-wth-gin-app
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '//**'
+    - '.github/workflows/go-wth-gin-app-AutoDeployTrigger-abb24a1c-ff92-4ae7-9518-184dc0e5f9d4.yml'
+
+  # Allow mannually trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.GOWTHGINAPP_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.GOWTHGINAPP_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.GOWTHGINAPP_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: acrfortests.azurecr.io
+          registryUsername: ${{ secrets.GOWTHGINAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.GOWTHGINAPP_REGISTRY_PASSWORD }}
+          containerAppName: go-wth-gin-app
+          resourceGroup: RG_GO_DOCKER_TESTS
+          imageToBuild: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+
