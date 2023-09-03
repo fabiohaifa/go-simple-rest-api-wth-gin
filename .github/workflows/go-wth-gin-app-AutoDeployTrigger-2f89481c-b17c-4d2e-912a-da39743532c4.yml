@@ -39,7 +39,7 @@ jobs:
           registryPassword: ${{ secrets.GOWTHGINAPP_REGISTRY_PASSWORD }}
           containerAppName: go-wth-gin-app
           resourceGroup: RG_GO_DOCKER_TESTS
-          imageToBuild: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
+          imageToBuild: acrfortests.azurecr.io/go-wth-gin-app:latest
           dockerfilePath: Dockerfile
 
 
