@@ -36,3 +36,11 @@ jobs:
             location: east us 2
             memory: 1
             restart-policy: OnFailure
+
+        - name: Deploy to Container App
+          uses: azure/container-apps-deploy-action@v1
+          with:
+            appSourcePath: ${{ github.workspace }}/src
+            acrName: acrfortests
+            containerAppName: go-wth-gin-app
+            resourceGroup: RG_GO_DOCKER_TESTS
