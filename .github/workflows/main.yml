@@ -21,14 +21,14 @@ jobs:
             password: ${{ secrets.GIT_TO_ACR_PASS }}
         - run: |
             docker build . -t acrfortests.azurecr.io/go-wth-gin-app
-            docker push acrfortests.azurecr.io/go-wth-gin-app
+            docker push acrfortests.azurecr.io/go-wth-gin-app:latest
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: RG_GO_DOCKER_TESTS
             dns-name-label: go-wth-gin
-            image: acrfortests.azurecr.io/go-wth-gin-app
+            image: acrfortests.azurecr.io/go-wth-gin-app:latest
             registry-login-server: acrfortests.azurecr.io
             registry-username: ${{ secrets.GIT_TO_ACR_USER }}
             registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
