@@ -9,6 +9,7 @@ package lib
 
 import (
 	mod "api-wth-gin/model"
+	"sort"
 )
 
 var ToDos = []mod.ToDo{
@@ -34,6 +35,12 @@ func (t T) GetAllToDos(text string) []mod.ToDo {
 			}
 		}
 	}
+
+	// Sort ToDos by ID
+	sort.Slice(retToDo, func(i, j int) bool {
+		return retToDo[i].ID < retToDo[j].ID
+	})
+
 	return retToDo
 }
 
