@@ -18,7 +18,7 @@ var ToDos = []mod.ToDo{
 	{ID: 3, Text: "Learn Docker", Done: true},
 	{ID: 4, Text: "Learn ACI", Done: false},
 	{ID: 5, Text: "Learn ACA", Done: false},
-	{ID: 9998, Text: "Learn AKS", Done: false},
+	{ID: 9997, Text: "Learn AKS", Done: false},
 	{ID: 6, Text: "Deploying to ACR", Done: false},
 }
 
