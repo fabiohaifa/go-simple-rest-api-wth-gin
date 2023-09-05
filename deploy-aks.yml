@@ -22,5 +22,5 @@ spec:
             - containerPort: 80
               protocol: TCP
           imagePullPolicy: Always
-          imagePullSecrets:
-            - name: demo-k8s-secret
+      imagePullSecrets:
+        - name: demo-k8s-secret
