@@ -6,7 +6,6 @@ jobs:
       name: Build and Push Docker Image
       runs-on: ubuntu-latest
       steps:
-      # checkout the repo
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@master
         
@@ -21,8 +20,9 @@ jobs:
           username: ${{ secrets.GIT_TO_ACR_USER }}
           password: ${{ secrets.GIT_TO_ACR_PASS }}
       - run: |
-          docker build . -t acrfortests.azurecr.io/go-wth-gin-app::latest
-          docker push acrfortests.azurecr.io/go-wth-gin-app::latest
+          docker build . -t acrfortests.azurecr.io/go-wth-gin-app:latest
+          docker push acrfortests.azurecr.io/go-wth-gin-app:latest
+
     deploy-to-aci:
       name: Deploy to Azure Container Instances
       runs-on: ubuntu-latest
@@ -32,12 +32,13 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
+
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: RG_GO_DOCKER_TESTS
             dns-name-label: go-wth-gin
-            image: acrfortests.azurecr.io/go-wth-gin-app::latest
+            image: acrfortests.azurecr.io/go-wth-gin-app:latest
             registry-login-server: acrfortests.azurecr.io
             registry-username: ${{ secrets.GIT_TO_ACR_USER }}
             registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
@@ -45,6 +46,7 @@ jobs:
             location: east us 2
             memory: 1
             restart-policy: OnFailure
+    
     deploy-to-aca:
       name: Deploy to Azure Container Apps
       runs-on: ubuntu-latest
@@ -54,13 +56,14 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
+
         - name: Deploy to Container App
           uses: azure/container-apps-deploy-action@v1
           with:
             acrName: acrfortests
             containerAppName: go-wth-gin-app
             resourceGroup: RG_GO_DOCKER_TESTS
-            imageToDeploy: acrfortests.azurecr.io/go-wth-gin-app::latest
+            imageToDeploy: acrfortests.azurecr.io/go-wth-gin-app:latest
 
     deploy-to-aks:
       name: Deploy to Azure Kubernetes Service
@@ -69,6 +72,7 @@ jobs:
       steps:
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@master
+
         - name: 'Docker Auth'
           uses: Azure/docker-login@v1
           with:
@@ -77,12 +81,14 @@ jobs:
              password: ${{ secrets.GIT_TO_ACR_PASS }}
         - name: Setup kubectl
           uses: azure/setup-kubectl@v3
+
         - name: Set AKS context
           uses: azure/aks-set-context@v1
           with:
             creds: '${{ secrets.AZURE_CREDENTIALS }}'
             resource-group: 'RG_GO_DOCKER_TESTS' 
             cluster-name: 'aks-cluster-for-gin'
+
         - name: Create Secret
           uses: Azure/k8s-create-secret@v1.1
           with:
@@ -90,6 +96,7 @@ jobs:
               container-registry-username: ${{ secrets.GIT_TO_ACR_USER }}
               container-registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
               secret-name: demo-k8s-secret
+
         - name: Deploy to AKS
           uses: Azure/k8s-deploy@v4
           with:
@@ -97,6 +104,6 @@ jobs:
             namespace: 'go-wth-gin-app'
             manifests: |
               deploy-aks.yml
-            images: acrfortests.azurecr.io/go-wth-gin-app::latest
+            images: acrfortests.azurecr.io/go-wth-gin-app:latest
             imagepullsecrets: |
                  demo-k8s-secret
