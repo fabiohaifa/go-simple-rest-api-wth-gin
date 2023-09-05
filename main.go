@@ -10,7 +10,12 @@ import (
 
 func getToDos(context *gin.Context) {
 	name := context.Param("text")
-	context.IndentedJSON(http.StatusOK, Lib.T.GetAllToDos(0, name))
+	r := Lib.T.GetAllToDos(0, name)
+	if len(r) > 0 {
+		context.IndentedJSON(http.StatusOK, r)
+	} else {
+		context.IndentedJSON(http.StatusNotFound, gin.H{"message": "Not Found"})
+	}
 }
 
 func main() {
