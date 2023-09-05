@@ -44,3 +44,19 @@ jobs:
             containerAppName: go-wth-gin-app
             resourceGroup: RG_GO_DOCKER_TESTS
             imageToDeploy: acrfortests.azurecr.io/go-wth-gin-app:latest
+
+        - name: Set AKS context
+          uses: azure/aks-set-context@v3
+          with:
+            resource-group: 'RG_GO_DOCKER_TESTS' 
+            cluster-name: 'aks-for-go-with-gin'
+        - name: Setup kubectl
+          uses: azure/setup-kubectl@v3
+        - name: Deploy to AKS
+          uses: Azure/k8s-deploy@v4
+          with:
+            namespace: 'go-wth-gin-app'
+            manifests: |
+              deploy-aks.yml
+            images: acrfortests.azurecr.io/go-wth-gin-app:latest
+            pull-images: false 
