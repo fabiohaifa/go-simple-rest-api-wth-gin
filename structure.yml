@@ -21,3 +21,17 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-with-gin-deployment
+  namespace: go-wth-gin-app
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: go-with-gin-deployment
