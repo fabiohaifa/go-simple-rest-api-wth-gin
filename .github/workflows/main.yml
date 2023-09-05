@@ -20,8 +20,8 @@ jobs:
           username: ${{ secrets.GIT_TO_ACR_USER }}
           password: ${{ secrets.GIT_TO_ACR_PASS }}
       - run: |
-          docker build . -t acrfortests.azurecr.io/go-wth-gin-app:latest
-          docker push acrfortests.azurecr.io/go-wth-gin-app:latest
+          docker build . -t acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
+          docker push acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
 
     deploy-to-aci:
       name: Deploy to Azure Container Instances
@@ -38,7 +38,7 @@ jobs:
           with:
             resource-group: RG_GO_DOCKER_TESTS
             dns-name-label: go-wth-gin
-            image: acrfortests.azurecr.io/go-wth-gin-app:latest
+            image: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
             registry-login-server: acrfortests.azurecr.io
             registry-username: ${{ secrets.GIT_TO_ACR_USER }}
             registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
@@ -63,7 +63,7 @@ jobs:
             acrName: acrfortests
             containerAppName: go-wth-gin-app
             resourceGroup: RG_GO_DOCKER_TESTS
-            imageToDeploy: acrfortests.azurecr.io/go-wth-gin-app:latest
+            imageToDeploy: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
 
     deploy-to-aks:
       name: Deploy to Azure Kubernetes Service
@@ -104,6 +104,6 @@ jobs:
             namespace: 'go-wth-gin-app'
             manifests: |
               deploy-aks.yml
-            images: acrfortests.azurecr.io/go-wth-gin-app:latest
+            images: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
             imagepullsecrets: |
                  demo-k8s-secret
