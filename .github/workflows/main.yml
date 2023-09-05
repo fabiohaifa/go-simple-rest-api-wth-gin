@@ -21,6 +21,7 @@ jobs:
             password: ${{ secrets.GIT_TO_ACR_PASS }}
         - run: |
             docker build . -t acrfortests.azurecr.io/go-wth-gin-app
+            docker tag go-wth-gin-app:${{ github.sha }} go-wth-gin-app:${{ github.sha }}
             docker push acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
 
         - name: 'Deploy to Azure Container Instances'
