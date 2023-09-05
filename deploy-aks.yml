@@ -17,7 +17,10 @@ spec:
     spec:
       containers:
         - name: go-with-gin-deployment
-          image: acrfortests.azurecr.io/go-api-wth-gin:latest
+          image: acrfortests.azurecr.io/go-api-wth-gin
           ports:
             - containerPort: 80
               protocol: TCP
+          imagePullPolicy: Always
+          imagePullSecrets:
+            - name: demo-k8s-secret
