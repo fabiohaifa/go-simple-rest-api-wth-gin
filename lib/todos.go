@@ -13,7 +13,7 @@ import (
 )
 
 var ToDos = []mod.ToDo{
-	{ID: 1, Text: "Learn Go", Done: true},
+	{ID: 1, Text: "Learn Go", Done: false},
 	{ID: 2, Text: "Learn Gin", Done: false},
 	{ID: 3, Text: "Learn Docker", Done: true},
 	{ID: 4, Text: "Learn ACI", Done: false},
