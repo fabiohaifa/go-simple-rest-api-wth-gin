@@ -3,26 +3,26 @@ name: Go_to_ACR
 
 jobs:
     build-and-push-image:
-        name: Build and Push Docker Image
-        runs-on: ubuntu-latest
-        steps:
-        # checkout the repo
-        - name: 'Checkout GitHub Action'
-          uses: actions/checkout@master
-          
-        - name: 'Login via Azure CLI'
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+      name: Build and Push Docker Image
+      runs-on: ubuntu-latest
+      steps:
+      # checkout the repo
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@master
         
-        - uses: azure/docker-login@v1
-          with:
-            login-server: acrfortests.azurecr.io
-            username: ${{ secrets.GIT_TO_ACR_USER }}
-            password: ${{ secrets.GIT_TO_ACR_PASS }}
-        - run: |
-            docker build . -t acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
-            docker push acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - uses: azure/docker-login@v1
+        with:
+          login-server: acrfortests.azurecr.io
+          username: ${{ secrets.GIT_TO_ACR_USER }}
+          password: ${{ secrets.GIT_TO_ACR_PASS }}
+      - run: |
+          docker build . -t acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
+          docker push acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
     deploy-to-aci:
       name: Deploy to Azure Container Instances
       runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
         - name: 'Docker Auth'
           uses: Azure/docker-login@v1
           with:
-             login-server: contoso.azurecr.io
+             login-server: acrfortests.azurecr.io
              username: ${{ secrets.GIT_TO_ACR_USER }}
              password: ${{ secrets.GIT_TO_ACR_PASS }}
         - name: Setup kubectl
