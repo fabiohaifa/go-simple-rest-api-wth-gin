@@ -80,7 +80,7 @@ jobs:
         - name: Create Secret
           uses: Azure/k8s-create-secret@v1.1
           with:
-              container-registry-url: contoso.azurecr.io
+              container-registry-url: acrfortests.azurecr.io
               container-registry-username: ${{ secrets.GIT_TO_ACR_USER }}
               container-registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
               secret-name: demo-k8s-secret
