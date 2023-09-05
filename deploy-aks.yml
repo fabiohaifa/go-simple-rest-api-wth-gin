@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: go-with-gin-deployment
-          image: acrfortests.azurecr.io/go-api-wth-gin:latest
+          image: acrfortests.azurecr.io/go-wth-gin-app:latest
           ports:
             - containerPort: 80
               protocol: TCP
