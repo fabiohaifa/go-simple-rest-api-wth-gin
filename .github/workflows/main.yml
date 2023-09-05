@@ -59,4 +59,4 @@ jobs:
             manifests: |
               deploy-aks.yml
             images: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
-            pull-images: false 
+            pull-images: true 
