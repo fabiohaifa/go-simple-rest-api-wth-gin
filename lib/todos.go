@@ -13,9 +13,9 @@ import (
 )
 
 var ToDos = []mod.ToDo{
-	{ID: 1, Text: "Learning Go", Done: true},
-	{ID: 2, Text: "Learning Gin", Done: true},
-	{ID: 3, Text: "Learning Docker", Done: true},
+	{ID: 1, Text: "Learning Go", Done: false},
+	{ID: 2, Text: "Learning Gin", Done: false},
+	{ID: 3, Text: "Learning Docker", Done: false},
 	{ID: 4, Text: "Learning Postman", Done: false},
 	{ID: 6, Text: "Learning ACI", Done: false},
 	{ID: 7, Text: "Learning ACA", Done: false},
@@ -30,9 +30,9 @@ func (t T) GetAllToDos(text string) []mod.ToDo {
 	if text == "" {
 		retToDo = ToDos
 	} else {
-		for i, _ := range ToDos {
-			if t.isToDo(ToDos[i], text) {
-				retToDo = append(retToDo, ToDos[i])
+		for _, item := range ToDos {
+			if t.isToDo(item, text) {
+				retToDo = append(retToDo, item)
 			}
 		}
 	}
