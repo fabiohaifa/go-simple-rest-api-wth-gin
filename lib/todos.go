@@ -13,14 +13,14 @@ import (
 )
 
 var ToDos = []mod.ToDo{
-	{ID: 1, Text: "Learn Go", Done: false},
-	{ID: 2, Text: "Learn Gin", Done: false},
-	{ID: 3, Text: "Learn Docker", Done: false},
-	{ID: 4, Text: "Learn Postman", Done: false},
-	{ID: 6, Text: "Learn ACI", Done: false},
-	{ID: 7, Text: "Learn ACA", Done: false},
-	{ID: 9345, Text: "Learn AKS", Done: false},
-	{ID: 5, Text: "GitHub Actions", Done: false},
+	{ID: 1, Text: "Learning Go", Done: true},
+	{ID: 2, Text: "Learning Gin", Done: true},
+	{ID: 3, Text: "Learning Docker", Done: true},
+	{ID: 4, Text: "Learning Postman", Done: false},
+	{ID: 6, Text: "Learning ACI", Done: false},
+	{ID: 7, Text: "Learning ACA", Done: false},
+	{ID: 9345, Text: "Learning AKS", Done: false},
+	{ID: 5, Text: "Learning GitHub Actions", Done: false},
 }
 
 type T int
