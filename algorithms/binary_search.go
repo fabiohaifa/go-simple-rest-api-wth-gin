@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("Binary Search examplo in GoLang!")
+	fmt.Println("Binary Search sample in GoLang!")
 
 	var arrSearch []int
 	arrSearch = []int{10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
