@@ -31,7 +31,7 @@ jobs:
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
           with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            creds: ${{ secrets.GOWTHGINAPP_AZURE_CREDENTIALS }}
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
@@ -40,8 +40,8 @@ jobs:
             dns-name-label: go-wth-gin
             image: acrfortests.azurecr.io/go-wth-gin-app:${{ github.sha }}
             registry-login-server: acrfortests.azurecr.io
-            registry-username: ${{ secrets.GIT_TO_ACR_USER }}
-            registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
+            registry-username: ${{ secrets.GOWTHGINAPP_REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.GOWTHGINAPP_REGISTRY_PASSWORD }}
             name: go-wth-gin
             location: east us 2
             memory: 1
@@ -84,15 +84,15 @@ jobs:
           uses: Azure/docker-login@v1
           with:
              login-server: acrfortests.azurecr.io
-             username: ${{ secrets.GIT_TO_ACR_USER }}
-             password: ${{ secrets.GIT_TO_ACR_PASS }}
+             username: ${{ secrets.GOWTHGINAPP_REGISTRY_USERNAME }}
+             password: ${{ secrets.GOWTHGINAPP_REGISTRY_PASSWORD }}
         - name: Setup kubectl
           uses: azure/setup-kubectl@v3
 
         - name: Set AKS context
           uses: azure/aks-set-context@v1
           with:
-            creds: '${{ secrets.AZURE_CREDENTIALS }}'
+            creds: '${{ secrets.GOWTHGINAPP_AZURE_CREDENTIALS }}'
             resource-group: 'RG_GO_DOCKER_TESTS' 
             cluster-name: 'aks-cluster-for-gin'
 
@@ -100,8 +100,8 @@ jobs:
           uses: Azure/k8s-create-secret@v1.1
           with:
               container-registry-url: acrfortests.azurecr.io
-              container-registry-username: ${{ secrets.GIT_TO_ACR_USER }}
-              container-registry-password: ${{ secrets.GIT_TO_ACR_PASS }}
+              container-registry-username: ${{ secrets.GOWTHGINAPP_REGISTRY_USERNAME }}
+              container-registry-password: ${{ secrets.GOWTHGINAPP_REGISTRY_PASSWORD }}
               secret-name: demo-k8s-secret
 
         - name: Deploy to AKS
