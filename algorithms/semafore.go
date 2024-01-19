@@ -17,6 +17,7 @@ func main2() {
 			mu.Lock()
 			defer mu.Unlock()
 			count++
+			fmt.Println(count)
 			wg.Done()
 		}()
 	}
