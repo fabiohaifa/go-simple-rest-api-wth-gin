@@ -1,11 +1,11 @@
-package main
+package algorithms
 
 import (
-	"fmt"
 	"sync"
+	"testing"
 )
 
-func main2() {
+func Test_main2(t *testing.T) {
 	var count int = 0
 	var wg sync.WaitGroup
 	var mu sync.Mutex
@@ -17,12 +17,14 @@ func main2() {
 			mu.Lock()
 			defer mu.Unlock()
 			count++
-			fmt.Println(count)
 			wg.Done()
 		}()
 	}
 
 	wg.Wait()
-	fmt.Println(count)
 
+	expectedCount := 10000
+	if count != expectedCount {
+		t.Errorf("Expected count to be %d, but got %d", expectedCount, count)
+	}
 }
